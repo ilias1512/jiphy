@@ -1,0 +1,39 @@
+$(document).ready(function(){
+    razmessage();
+
+	$("#all_items").change(function() {
+        if (this.checked) {
+            $(".checkSingle").each(function() {
+					this.checked=true;
+            });
+			$('#ifchecked').val("yes");
+        } else {
+            $(".checkSingle").each(function() {
+                this.checked=false;
+            });
+			$('#ifchecked').val("no");
+        }
+    });
+
+    $(".checkSingle").click(function () {
+        if ($(this).is(":checked")) {
+            var isAllChecked = 0;
+
+            $(".checkSingle").each(function() {
+                if (!this.checked)
+                    isAllChecked = 1;
+            });
+
+            if (isAllChecked == 0) {
+                $("#all_items").prop("checked", true);
+            }
+			$('#ifchecked').val("yes");
+        }
+        else {
+            $("#all_items").prop("checked", false);
+			var legchecked = $('input[class^=checkSingle]:checked').length;
+			if(legchecked == 0) { $('#ifchecked').val("no");}
+        }
+
+    });
+});
